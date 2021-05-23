@@ -12,7 +12,6 @@ import {
     Grid,
     Typography,
     TablePagination,
-    TableFooter
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -26,8 +25,13 @@ const useStyles = makeStyles(theme => ({
     },
     tableHeadCell: {
         fontWeight: 'bold',
-        backgroundColor: theme.palette.primary.dark,
-        color: theme.palette.getContrastText(theme.palette.primary.dark)
+        backgroundColor: "#BB86FC",
+        color: theme.palette.getContrastText("#BB86FC")
+    },
+    tableBodyCell: {
+        fontWeight: '400',
+        backgroundColor: "#1E1E1E",
+        color: theme.palette.getContrastText("#1E1E1E")
     },
     avatarClass: {
         backgroundColor: theme.palette.primary.light,
@@ -35,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
     nameStyle: {
         fontWeight: '600',
-        color: theme.palette.secondary.dark
+        color: "#CF6679"
     },
     styleMember: {
         fontWeight: 'bold',
@@ -94,7 +98,7 @@ function MTable() {
                     <TableBody>
                         {customerData && customerData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => (
                             <TableRow key={i}>
-                                <TableCell>
+                                <TableCell className={classes.tableBodyCell}>
                                     <Grid container>
                                         <Grid item lg={2}>
                                             <Avatar className={classes.avatarClass} alt={row.firstname + " " + row.lastname} src={row.avatarUrl} />
@@ -105,17 +109,17 @@ function MTable() {
                                         </Grid>
                                     </Grid>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className={classes.tableBodyCell}>
                                     <Typography color="primary" variant="subtitle2">
                                         {row.email}
                                     </Typography>
                                 </TableCell>
-                                <TableCell>
-                                    <Typography color="textSecondary" variant="body2">
+                                <TableCell className={classes.tableBodyCell}>
+                                    <Typography>
                                         {row.phone}
                                     </Typography>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className={classes.tableBodyCell}>
                                     <Typography className={classes.styleMember}
                                         style={{
                                             backgroundColor: row.hasPremium ? "green" : "orange"
@@ -129,22 +133,24 @@ function MTable() {
                                                 "False"
                                         }
                                     </Typography></TableCell>
-                                <TableCell>{row.bids[0] ? row.bids[0].amount : null}</TableCell>
+                                <TableCell className={classes.tableBodyCell}>{row.bids[0] ? row.bids[0].amount : null}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
-                    <TableFooter>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 100]}
-                            component="div"
-                            count={customerData.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onChangePage={handleChangePage}
-                            onChangeRowsPerPage={handleChangeRowsPerPage}
-                        />
-                    </TableFooter>
                 </Table>
+                <TablePagination
+                    style={{
+                        backgroundColor: "#BB86FC",
+                        color: "#181121"
+                    }}
+                    rowsPerPageOptions={[5, 10, 25, 100]}
+                    component="div"
+                    count={customerData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
             </TableContainer>
         </>
     )

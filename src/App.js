@@ -3,7 +3,7 @@ import MTable from "./components/MTable";
 function App() {
     return (
         <div>
-            <h2>Customer Data</h2>
+            <h1 style={{ textAlign: "center", color:"#fff" }}>Customer Data</h1>
             <MTable />
         </div>
     );
